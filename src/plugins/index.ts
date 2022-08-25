@@ -3,7 +3,7 @@
  * @Description: 加载插件文件
  * @Date: 2021/10/25 18:56:51
  * @LastEditors: jrucker
- * @LastEditTime: 2022/08/25 10:36:24
+ * @LastEditTime: 2022/08/25 10:40:01
  */
 
 import { createApp } from 'vue'
