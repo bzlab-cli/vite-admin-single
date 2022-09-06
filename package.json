@@ -95,7 +95,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
-      "vue-cli-service lint",
+      "vite lint",
       "git add"
     ]
   }
