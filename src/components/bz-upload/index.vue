@@ -1,6 +1,6 @@
 <!--
  * @Author: jrucker
- * @Description: 
+ * @Description:
  * @Date: 2021/11/26 09:54:36
  * @LastEditors: jrucker
  * @LastEditTime: 2022/07/18 12:24:21
@@ -15,6 +15,7 @@ import { useStore } from 'vuex'
 import { UserActionTypes } from '@/store/modules/user/types'
 import { getToken } from '@/utils/auth'
 import { getEnv } from '@/config/settings'
+const env = getEnv(import.meta.env.VITE_APP_ENV)
 
 function NOOP() {}
 export default defineComponent({
@@ -33,7 +34,7 @@ export default defineComponent({
     },
     action: {
       type: String,
-      default: import.meta.env.VITE_APP_FTP_API + '/ftp/uploadFile?path=nzf-dev/$md5'
+      default: import.meta.env.VITE_APP_FTP_API + `/ftp/uploadFile?path=${env}/$md5`
     },
     download: {
       type: String,
@@ -161,7 +162,6 @@ export default defineComponent({
     }
 
     if (!uploadData.aliyun) {
-      let env = getEnv(import.meta.env.VITE_APP_ENV)
       if (this.isBim) {
         uploadData.action = import.meta.env.VITE_APP_FTP_API + `/ftp/uploadFile?path=${env}/bim_temp/$md5`
       } else {
