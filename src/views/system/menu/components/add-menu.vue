@@ -17,7 +17,7 @@
         <el-row :gutter="35">
           <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
             <el-form-item label="菜单名称" prop="menuName">
-              <el-input v-model="ruleForm.menuName" placeholder="请输入" clearable></el-input>
+              <el-input v-model="ruleForm.menuName" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
@@ -32,7 +32,7 @@
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
             <el-form-item label="菜单排序" prop="menuSort">
-              <el-input v-model="ruleForm.menuSort" placeholder="菜单排序" clearable></el-input>
+              <el-input v-model="ruleForm.menuSort" placeholder="菜单排序" clearable />
             </el-form-item>
           </el-col>
           <el-col
@@ -58,7 +58,7 @@
             v-if="ruleForm.menuType === 1 || ruleForm.menuType === 2"
           >
             <el-form-item label="组件名称" prop="menuRoute">
-              <el-input v-model="ruleForm.menuRoute" placeholder="请输入" clearable></el-input>
+              <el-input v-model="ruleForm.menuRoute" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
           <el-col
@@ -71,7 +71,7 @@
             v-if="ruleForm.menuType === 1 || ruleForm.menuType === 2"
           >
             <el-form-item label="组件" prop="menuComponents">
-              <el-input v-model="ruleForm.menuComponents" placeholder="请输入" clearable></el-input>
+              <el-input v-model="ruleForm.menuComponents" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
           <el-col
@@ -84,22 +84,22 @@
             v-if="ruleForm.menuType === 1 || ruleForm.menuType === 2"
           >
             <el-form-item label="组件路径" prop="menuUrl">
-              <el-input v-model="ruleForm.menuUrl" placeholder="请输入" clearable></el-input>
+              <el-input v-model="ruleForm.menuUrl" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
             <el-form-item label="是否显示" prop="hiddenFlag">
               <el-select v-model="ruleForm.hiddenFlag" placeholder="请选择" style="width: 100%">
-                <el-option label="显示" :value="1"></el-option>
-                <el-option label="隐藏" :value="0"></el-option>
+                <el-option label="显示" :value="1" />
+                <el-option label="隐藏" :value="0" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
             <el-form-item label="状态" prop="status">
               <el-select v-model="ruleForm.status" placeholder="请选择" style="width: 100%">
-                <el-option label="启用" :value="0"></el-option>
-                <el-option label="禁用" :value="1"></el-option>
+                <el-option label="启用" :value="0" />
+                <el-option label="禁用" :value="1" />
               </el-select>
             </el-form-item>
           </el-col>
@@ -113,7 +113,7 @@
             v-if="ruleForm.menuType === 2 || ruleForm.menuType === 3"
           >
             <el-form-item label="权限标识">
-              <el-input v-model="ruleForm.menuCode" placeholder="请输入" clearable></el-input>
+              <el-input v-model="ruleForm.menuCode" placeholder="请输入" clearable />
             </el-form-item>
           </el-col>
           <el-col
@@ -127,8 +127,8 @@
           >
             <el-form-item label="缓存">
               <el-select v-model="ruleForm.cache" placeholder="请选择" style="width: 100%">
-                <el-option label="禁用" :value="0"></el-option>
-                <el-option label="启用" :value="1"></el-option>
+                <el-option label="禁用" :value="0" />
+                <el-option label="启用" :value="1" />
               </el-select>
             </el-form-item>
           </el-col>

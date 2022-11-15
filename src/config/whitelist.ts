@@ -9,8 +9,4 @@
 const whiteList: string[] = ['/login', '/auth-redirect']
 const whiteNameList: string[] = []
 
-export {
-  whiteList,
-  whiteNameList
-}
-
+export { whiteList, whiteNameList }

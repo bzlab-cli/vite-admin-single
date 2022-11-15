@@ -13,7 +13,7 @@
             placeholder="请输入组织名称"
             prefix-icon="el-icon-search"
             style="max-width: 180px"
-          ></el-input>
+          />
           <el-button size="small" type="primary" @click="handleSearch">查询</el-button>
         </div>
       </div>
@@ -24,15 +24,15 @@
         :tree-props="{ children: 'childTreeList', hasChildren: 'hasChildren' }"
         style="width: 100%"
       >
-        <el-table-column prop="orgName" label="组织名称" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="orgSort" label="排序" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="orgName" label="组织名称" show-overflow-tooltip />
+        <el-table-column prop="orgSort" label="排序" show-overflow-tooltip />
         <el-table-column prop="status" label="状态">
           <template v-slot="{ row }">
             <el-tag :type="row.status == 0 ? '' : 'danger'">{{ row.status == 0 ? '启用' : '禁用' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="remarks" label="备注" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip />
+        <el-table-column prop="remarks" label="备注" show-overflow-tooltip />
         <el-table-column prop="operate" label="操作" width="90">
           <template #default="scope">
             <el-button size="mini" type="text" @click="onOpenEditOrg(scope.row)">修改</el-button>

@@ -3,24 +3,19 @@
     <el-dialog :title="dialogTitle" v-model="isShowDialog" width="500px" @close="onCancel">
       <el-form :model="ruleForm" :rules="rules" ref="formRef" size="small" label-width="80px">
         <el-form-item label="用户名" prop="userName">
-          <el-input v-model="ruleForm.userName" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.userName" placeholder="请输入" clearable />
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
-          <el-input v-model="ruleForm.phone" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.phone" placeholder="请输入" clearable />
         </el-form-item>
         <el-form-item label="角色" prop="roleId">
           <el-select v-model="ruleForm.roleId" placeholder="请选择" clearable style="width: 100%">
-            <el-option :value="item.id" :label="item.roleName" v-for="(item, i) in roleList" :key="i"></el-option>
+            <el-option :value="item.id" :label="item.roleName" v-for="(item, i) in roleList" :key="i" />
           </el-select>
         </el-form-item>
         <el-form-item label="专业">
           <el-select v-model="ruleForm.professional" placeholder="请选择" clearable style="width: 100%">
-            <el-option
-              :value="item.value"
-              :label="item.name"
-              v-for="(item, i) in professionalSelectList"
-              :key="i"
-            ></el-option>
+            <el-option :value="item.value" :label="item.name" v-for="(item, i) in professionalSelectList" :key="i" />
           </el-select>
         </el-form-item>
         <el-form-item label="所属组织" prop="orgId" v-if="ruleForm.roleId !== 'ad'">
@@ -33,23 +28,18 @@
         </el-form-item>
         <el-form-item label="权限" prop="competenceIds">
           <el-select v-model="ruleForm.competenceIds" multiple placeholder="请选择" clearable style="width: 100%">
-            <el-option
-              :value="item.id"
-              :label="item.competenceName"
-              v-for="(item, i) in competenceList"
-              :key="i"
-            ></el-option>
+            <el-option :value="item.id" :label="item.competenceName" v-for="(item, i) in competenceList" :key="i" />
           </el-select>
         </el-form-item>
 
         <el-form-item label="邮箱">
-          <el-input v-model="ruleForm.email" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.email" placeholder="请输入" clearable />
         </el-form-item>
         <el-form-item label="密码" prop="password" v-if="showPassword(dialogType)">
-          <el-input v-model="ruleForm.password" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.password" placeholder="请输入" clearable />
         </el-form-item>
         <el-form-item label="备注">
-          <el-input v-model="ruleForm.remarks" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.remarks" placeholder="请输入" clearable />
         </el-form-item>
       </el-form>
       <template #footer>

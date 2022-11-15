@@ -23,7 +23,7 @@ export enum Settings {
 }
 
 export function getEnv(val) {
-  let obj = {
+  const obj = {
     development: 'nzf-dev',
     deployment: 'nzf-dev',
     release: 'nzf-test',

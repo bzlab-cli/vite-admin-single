@@ -11,12 +11,12 @@
             placeholder="请输入角色名称"
             prefix-icon="el-icon-search"
             style="max-width: 180px"
-          ></el-input>
+          />
           <el-button size="small" type="primary" @click="handleSearch">查询</el-button>
         </div>
       </div>
       <el-table :data="tableData.data" stripe style="width: 100%">
-        <el-table-column prop="roleName" label="角色名称" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="roleName" label="角色名称" show-overflow-tooltip />
         <el-table-column prop="status" label="状态">
           <template v-slot="{ row }">
             <el-tag :type="row.status == 0 ? '' : 'danger'">{{ row.status == 0 ? '启用' : '禁用' }}</el-tag>
@@ -28,7 +28,7 @@
             <span v-else>{{ scope.row.orgName }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip />
         <el-table-column prop="operate" label="操作" width="90">
           <template #default="scope">
             <el-button size="mini" type="text" v-if="scope.row.editFlag === 1" @click="onOpenAuthorize(scope.row)">
@@ -52,7 +52,7 @@
         v-model:page-size="tableData.params.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="tableData.total"
-      ></el-pagination>
+      />
     </el-card>
     <add-role ref="addRoleRef" />
     <add-authorize ref="addAuthorizeRef" />

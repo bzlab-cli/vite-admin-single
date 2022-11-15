@@ -6,14 +6,14 @@
     <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
       <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
         <el-menu-item :index="resolvePath(theOnlyOneChild.path)" :class="{ 'submenu-title-noDropdown': isFirstLevel }">
-          <i v-if="theOnlyOneChild.meta.icon" :class="theOnlyOneChild.meta.icon"></i>
+          <i v-if="theOnlyOneChild.meta.icon" :class="theOnlyOneChild.meta.icon" />
           <span v-if="theOnlyOneChild.meta.title">{{ theOnlyOneChild.meta.title }}</span>
         </el-menu-item>
       </SidebarItemLink>
     </template>
     <el-submenu v-else :index="resolvePath(item.path)">
       <template #title>
-        <i v-if="item.meta && item.meta.icon" :class="item.meta.icon"></i>
+        <i v-if="item.meta && item.meta.icon" :class="item.meta.icon" />
         <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">

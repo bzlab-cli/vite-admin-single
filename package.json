@@ -9,7 +9,9 @@
     "build:release": "cross-env NODE_ENV=production dotenv -e .env.release vite build",
     "build": "cross-env NODE_ENV=production dotenv -e .env.prod vite build",
     "preview": "vite preview --port 8442",
-    "lint": "vite lint",
+    "lint:eslint": "eslint --cache --max-warnings 0 \"src/**/*.{vue,js,ts,tsx}\" --fix",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,ts,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint": "npm-run-all lint:eslint lint:prettier",
     "mock": "cd mock && ts-node-dev mock.ts",
     "proxy:init": "ts-node-dev @bzlab/bz-vue-proxy init --config=build/proxy/config.json",
     "proxy": "ts-node-dev @bzlab/bz-vue-proxy use --config=build/proxy/config.json"
@@ -98,7 +100,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
-      "vite lint",
+      "eslint --fix",
       "git add"
     ]
   }

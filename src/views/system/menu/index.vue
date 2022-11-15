@@ -11,7 +11,7 @@
             placeholder="请输入菜单名称"
             prefix-icon="el-icon-search"
             style="max-width: 180px"
-          ></el-input>
+          />
           <el-button size="small" type="primary" @click="handleSearch">查询</el-button>
         </div>
       </div>
@@ -24,7 +24,7 @@
       >
         <el-table-column label="菜单名称" show-overflow-tooltip width="150">
           <template #default="scope">
-            <i :class="scope.row.menuIcon"></i>
+            <i :class="scope.row.menuIcon" />
             <span>{{ scope.row.menuName }}</span>
           </template>
         </el-table-column>
@@ -40,7 +40,7 @@
             <el-tag type="warning" v-if="row.menuType === 3">按钮</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="menuCode" label="权限标识" show-overflow-tooltip width="150"></el-table-column>
+        <el-table-column prop="menuCode" label="权限标识" show-overflow-tooltip width="150" />
         <el-table-column label="组件地址" show-overflow-tooltip>
           <template #default="scope">
             <span>{{ scope.row.menuComponents }}</span>
@@ -51,7 +51,7 @@
             <span>{{ scope.row.menuRoute }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="menuSort" label="排序" show-overflow-tooltip width="100"></el-table-column>
+        <el-table-column prop="menuSort" label="排序" show-overflow-tooltip width="100" />
         <el-table-column prop="cache" label="是否缓存">
           <template v-slot="{ row }">
             <el-tag v-if="row.menuType === 2" :type="row.cache == 0 ? 'danger' : ''">
@@ -69,7 +69,7 @@
             <el-tag :type="row.status == 0 ? '' : 'danger'">{{ row.status == 0 ? '启用' : '禁用' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip width="150"></el-table-column>
+        <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip width="150" />
         <el-table-column label="操作" show-overflow-tooltip width="100">
           <template #default="scope">
             <el-button size="mini" type="text" @click="onOpenEditMenu(scope.row)">修改</el-button>

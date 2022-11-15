@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2021/10/25 18:56:51
  * @LastEditors: jrucker
- * @LastEditTime: 2022/01/26 10:25:28
+ * @LastEditTime: 2022/11/15 11:30:39
  */
 
 module.exports = {
@@ -16,11 +16,11 @@ module.exports = {
   },
   globals: {
     defineEmits: true,
+    defineProps: true,
+    defineExpose: true,
     document: true,
     localStorage: true,
     window: true,
-    defineProps: true,
-    defineExpose: true,
     IObjModel: true,
     IResponseModel: true,
     Recordable: true,
@@ -54,7 +54,32 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': ['off'],
     'vue/no-setup-props-destructure': ['off'],
     '@typescript-eslint/no-empty-function': ['off'],
-    '@typescript-eslint/no-unused-vars': [1],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_"
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_"
+      }
+    ],
+    "vue/html-self-closing": [
+      "error",
+      {
+        html: {
+          void: "always",
+          normal: "always",
+          component: "always"
+        },
+        svg: "always",
+        math: "always"
+      }
+    ],
     'no-param-reassign': ['off'],
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-var-requires': 0

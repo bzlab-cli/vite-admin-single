@@ -12,7 +12,7 @@
             prefix-icon="el-icon-search"
             placeholder="请输入用户名"
             style="width: 180px"
-          ></el-input>
+          />
           <el-input
             class="mr10"
             v-model="tableData.params.phone"
@@ -21,7 +21,7 @@
             prefix-icon="el-icon-search"
             placeholder="请输入手机号"
             style="width: 180px"
-          ></el-input>
+          />
           <tree-select
             v-model="tableData.params.eqOrgId"
             :list="treeSelectList"
@@ -37,7 +37,7 @@
             class="mr10"
             style="width: 180px"
           >
-            <el-option :value="item.id" :label="item.roleName" v-for="(item, i) in roleList" :key="i"></el-option>
+            <el-option :value="item.id" :label="item.roleName" v-for="(item, i) in roleList" :key="i" />
           </el-select>
           <el-select
             v-model="tableData.params.forbiddenStatus"
@@ -46,17 +46,17 @@
             class="mr10"
             style="width: 180px"
           >
-            <el-option :value="item.id" :label="item.name" v-for="(item, i) in statusList" :key="i"></el-option>
+            <el-option :value="item.id" :label="item.name" v-for="(item, i) in statusList" :key="i" />
           </el-select>
           <el-button size="small" type="primary" @click="handleSearch">查询</el-button>
         </div>
       </div>
       <el-table :data="tableData.data" stripe style="width: 100%">
-        <el-table-column prop="userName" label="用户名" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="phone" label="手机号" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="email" label="邮箱" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="roleName" label="角色" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="userName" label="用户名" show-overflow-tooltip />
+        <el-table-column prop="phone" label="手机号" show-overflow-tooltip />
+        <el-table-column prop="email" label="邮箱" show-overflow-tooltip />
+        <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip />
+        <el-table-column prop="roleName" label="角色" show-overflow-tooltip />
         <el-table-column prop="orgName" label="组织" show-overflow-tooltip>
           <template #default="{ row }">
             <span v-if="row.roleId === 'ad'">-</span>
@@ -75,7 +75,7 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="remarks" label="备注" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="remarks" label="备注" show-overflow-tooltip />
         <el-table-column prop="operate" label="操作" width="180">
           <template #default="scope">
             <el-button size="mini" type="text" @click="onOpenEditUser(scope.row)">修改</el-button>
@@ -102,7 +102,7 @@
         v-model:page-size="tableData.params.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="tableData.total"
-      ></el-pagination>
+      />
     </el-card>
     <add-user ref="addUserRef" />
   </div>

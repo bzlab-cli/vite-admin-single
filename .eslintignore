@@ -1,12 +1,6 @@
-src/config
-src/utils/bideo.js
-vue.config.js
+.DS_Store
+node_modules
+dist
 mock/
-
 src/utils/ezuikit.js
 src/utils/china.js
-src/lib/
-
-# src/assets
-# public
-# dist

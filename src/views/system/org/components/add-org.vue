@@ -3,7 +3,7 @@
     <el-dialog :title="dialogTitle" v-model="isShowDialog" width="500px" @close="onCancel">
       <el-form :model="ruleForm" :rules="rules" ref="formRef" size="small" label-width="80px">
         <el-form-item label="组织名称" prop="orgName">
-          <el-input v-model="ruleForm.orgName" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.orgName" placeholder="请输入" clearable />
         </el-form-item>
         <!-- <el-form-item label="上级组织">
           <tree-select
@@ -14,7 +14,7 @@
           />
         </el-form-item> -->
         <el-form-item label="排序" prop="orgSort">
-          <el-input v-model="ruleForm.orgSort" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.orgSort" placeholder="请输入" clearable />
         </el-form-item>
         <el-form-item label="状态" prop="status">
           <el-radio-group v-model="ruleForm.status">
@@ -23,7 +23,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注">
-          <el-input v-model="ruleForm.remarks" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.remarks" placeholder="请输入" clearable />
         </el-form-item>
       </el-form>
       <template #footer>

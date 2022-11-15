@@ -7,17 +7,17 @@
  */
 
 interface LayoutSettings {
-  showTagsView: boolean 
-  showSidebarLogo: boolean 
-  fixedHeader: boolean 
-  sidebarTextTheme: boolean 
+  showTagsView: boolean
+  showSidebarLogo: boolean
+  fixedHeader: boolean
+  sidebarTextTheme: boolean
 }
-  
+
 const layoutSettings: LayoutSettings = {
   showTagsView: false,
   fixedHeader: true,
   showSidebarLogo: true,
-  sidebarTextTheme: true,
+  sidebarTextTheme: true
 }
 
 export default layoutSettings

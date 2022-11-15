@@ -1,6 +1,6 @@
 <template>
   <div :class="[{ 'is-active': isActive }]" @click="toggleClick">
-    <i class="icon el-icon-s-unfold"></i>
+    <i class="icon el-icon-s-unfold" />
   </div>
 </template>
 

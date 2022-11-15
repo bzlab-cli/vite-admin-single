@@ -27,7 +27,7 @@
                 { fa: fontIconTabsIndex === 2 }
               ]"
               class="font14"
-            ></i>
+            />
           </template>
         </el-input>
       </template>
@@ -50,17 +50,13 @@
                   <div class="icon-selector-wrap-item" :class="{ 'icon-selector-active': fontIconPrefix === v }">
                     <div class="flex-margin">
                       <div class="icon-selector-wrap-item-value">
-                        <i :class="v"></i>
+                        <i :class="v" />
                       </div>
                     </div>
                   </div>
                 </el-col>
               </el-row>
-              <el-empty
-                :image-size="100"
-                v-if="fontIconSheetsFilterList.length <= 0"
-                :description="emptyDescription"
-              ></el-empty>
+              <el-empty :image-size="100" v-if="fontIconSheetsFilterList.length <= 0" :description="emptyDescription" />
             </el-scrollbar>
           </div>
         </div>

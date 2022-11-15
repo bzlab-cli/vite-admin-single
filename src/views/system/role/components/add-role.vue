@@ -3,7 +3,7 @@
     <el-dialog :title="dialogTitle" v-model="isShowDialog" width="500px" @close="onCancel">
       <el-form :model="ruleForm" :rules="rules" ref="formRef" size="small" label-width="80px">
         <el-form-item label="角色名称" prop="roleName">
-          <el-input v-model="ruleForm.roleName" placeholder="请输入" clearable></el-input>
+          <el-input v-model="ruleForm.roleName" placeholder="请输入" clearable />
         </el-form-item>
         <el-form-item label="组织">
           <tree-select
