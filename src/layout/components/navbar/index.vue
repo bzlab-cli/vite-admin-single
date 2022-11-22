@@ -4,7 +4,7 @@
       id="hamburger-container"
       :is-active="sidebar.opened"
       class="hamburger-container"
-      @toggle-click="toggleSideBar"
+      @toggle-click="toggleSidebar"
     />
     <BreadCrumb id="breadcrumb-container" class="breadcrumb-container" />
     <div class="right-menu">
@@ -15,7 +15,7 @@
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="logout">
+            <el-dropdown-item @click="logOut">
               <span class="displayBlock">退出登录</span>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -29,9 +29,8 @@
 import BreadCrumb from '@/components/bread-crumb/index.vue'
 import Hamburger from '@/components/hamburger/index.vue'
 import { computed, reactive, toRefs } from 'vue'
-import { useStore } from 'vuex'
-import { AppActionTypes } from '@/store/modules/app/types'
-import { UserActionTypes } from '@/store/modules/user/types'
+import { useAppStore } from '@/store/modules/app'
+import { useUserStore } from '@/store/modules/user'
 
 export default {
   components: {
@@ -39,25 +38,27 @@ export default {
     Hamburger
   },
   setup() {
-    const store = useStore()
+    const appStore = useAppStore()
+    const userStore = useUserStore()
+
     const sidebar = computed(() => {
-      return store.state.app.sidebar
+      return appStore.sidebar
     })
     const device = computed(() => {
-      return store.state.app.device.toString()
+      return appStore.device.toString()
     })
     const name = computed(() => {
-      return store.state.user.name
+      return userStore.name
     })
     const avatar = computed(() => {
-      return store.state.user.avatar
+      return userStore.avatar
     })
     const state = reactive({
-      toggleSideBar: () => {
-        store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, false)
+      toggleSidebar: () => {
+        appStore.toggleSidebar(false)
       },
-      logout: () => {
-        store.dispatch(UserActionTypes.ACTION_LOGIN_OUT)
+      logOut: () => {
+        userStore.loginOut()
         window.location.href = '/'
       }
     })

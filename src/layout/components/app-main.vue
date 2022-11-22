@@ -9,16 +9,16 @@
 </template>
 
 <script lang="ts">
-import { useStore } from 'vuex'
+import { useTagsStore } from '@/store/modules/tags'
 import { defineComponent, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
   setup() {
-    const store = useStore()
+    const tagsStore = useTagsStore()
     const route = useRoute()
     const cachedViews = computed(() => {
-      return store.state.tagViews.cachedViews
+      return tagsStore.cachedViews
     })
     const key = () => {
       return route.path

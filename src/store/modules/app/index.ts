@@ -3,32 +3,63 @@
  * @Description:
  * @Date: 2021/10/25 18:56:51
  * @LastEditors: jrucker
- * @LastEditTime: 2021/10/27 19:46:58
+ * @LastEditTime: 2022/11/22 17:33:50
  */
+import { reactive, toRefs } from 'vue'
+import { defineStore } from 'pinia'
+import { getSidebarStatus, setSidebarStatus } from '@/utils/auth'
+import { store } from '@/store'
 
-import { Store as VuexStore, CommitOptions, DispatchOptions, Module } from 'vuex'
-import { RootState } from '@/store'
-import { state } from './state'
-import { mutations, Mutations } from './mutations'
-import { actions, Actions } from './actions'
-import { AppState } from './state'
-
-export type AppStore<S = AppState> = Omit<VuexStore<S>, 'getters' | 'commit' | 'dispatch'> & {
-  commit<K extends keyof Mutations, P extends Parameters<Mutations[K]>[1]>(
-    key: K,
-    payload: P,
-    options?: CommitOptions
-  ): ReturnType<Mutations[K]>
-} & {
-  dispatch<K extends keyof Actions>(
-    key: K,
-    payload: Parameters<Actions[K]>[1],
-    options?: DispatchOptions
-  ): ReturnType<Actions[K]>
+export enum DeviceType {
+  Mobile,
+  Desktop
 }
-export const store: Module<AppState, RootState> = {
-  state,
-  mutations,
-  actions
-  // namespaced: true,
+export interface AppState {
+  device: DeviceType
+  sidebar: {
+    opened: boolean
+    withoutAnimation: boolean
+  }
+  size: string
+}
+
+export const useAppStore = defineStore('app', () => {
+  const state = reactive<AppState>({
+    device: DeviceType.Desktop,
+    sidebar: {
+      opened: getSidebarStatus() !== 'closed',
+      withoutAnimation: false
+    },
+    size: 'medium'
+  })
+
+  const toggleSidebar = (withoutAnimation: boolean) => {
+    state.sidebar.opened = !state.sidebar.opened
+    state.sidebar.withoutAnimation = withoutAnimation
+    if (state.sidebar.opened) {
+      setSidebarStatus('opened')
+    } else {
+      setSidebarStatus('closed')
+    }
+  }
+
+  const closeSidebar = (withoutAnimation: boolean) => {
+    state.sidebar.opened = false
+    state.sidebar.withoutAnimation = withoutAnimation
+    setSidebarStatus('closed')
+  }
+  const toggleDevice = (device: DeviceType) => {
+    state.device = device
+  }
+
+  return {
+    ...toRefs(state),
+    toggleSidebar,
+    closeSidebar,
+    toggleDevice
+  }
+})
+
+export function useAppStoreHook() {
+  return useAppStore(store)
 }

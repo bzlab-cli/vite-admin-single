@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2021/11/26 09:54:36
  * @LastEditors: jrucker
- * @LastEditTime: 2022/07/18 12:24:21
+ * @LastEditTime: 2022/11/22 17:55:45
 -->
 
 <script lang="ts">
@@ -11,8 +11,7 @@ import { defineComponent, h } from 'vue'
 import BzUpload from '@bz/bz-upload'
 import '@bz/bz-upload/lib/bz-upload.css'
 import { ElMessage } from 'element-plus'
-import { useStore } from 'vuex'
-import { UserActionTypes } from '@/store/modules/user/types'
+import { useUserStore } from '@/store/modules/user'
 import { getToken } from '@/utils/auth'
 import { getEnv } from '@/config/settings'
 const env = getEnv(import.meta.env.VITE_APP_ENV)
@@ -123,11 +122,11 @@ export default defineComponent({
     }
   },
   render() {
+    const userStore = useUserStore()
     const onError = res => {
-      const store = useStore()
       if (res.status === 500) {
         ElMessage.error('登录已失效，请重新登录')
-        store.dispatch(UserActionTypes.ACTION_RESET_TOKEN, undefined).then(() => {
+        userStore.resetToken().then(() => {
           location.reload()
         })
       }

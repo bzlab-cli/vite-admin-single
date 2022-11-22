@@ -27,7 +27,9 @@ import { computed, defineComponent } from 'vue'
 import SidebarItem from './sidebar-item.vue'
 import SidebarLogo from './sidebar-logo.vue'
 import variables from '@/styles/variables.module.scss'
-import { useStore } from 'vuex'
+import { useAppStore } from '@/store/modules/app'
+import { usePermissionStore } from '@/store/modules/permission'
+import { useSettingsStore } from '@/store/modules/settings'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
@@ -36,24 +38,25 @@ export default defineComponent({
     SidebarLogo
   },
   setup() {
-    const store = useStore()
+    const appStore = useAppStore()
+    const permissionStore = usePermissionStore() as any
+    const settingsStore = useSettingsStore()
     const route = useRoute()
     const sidebar = computed(() => {
-      return store.state.app.sidebar
+      return appStore.sidebar
     })
     const routes = computed(() => {
-      return store.state.permission.routes
+      return permissionStore.routes
     })
+
     const showLogo = computed(() => {
-      return store.state.settings.showSidebarLogo
+      return settingsStore.showSidebarLogo
     })
 
     const menuActiveTextColor = computed(() => {
-      console.log(store.state.settings.sidebarTextTheme)
-
-      if (store.state.settings.sidebarTextTheme) {
+      if (settingsStore.sidebarTextTheme) {
         return '#57CAEB'
-        // return store.state.settings.theme
+        // return settingsStore.theme
       } else {
         return variables.menuActiveText
       }

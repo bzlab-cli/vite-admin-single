@@ -4,13 +4,13 @@ import path from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import eslintPlugin from 'vite-plugin-eslint'
 import viteCompression from 'vite-plugin-compression'
+import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 // import { loadEnv } from 'vite'
 const dynamicProxy = require('./build/proxy/index.ts')
 const resolve = (p: string) => path.resolve(__dirname, p)
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
-  // const root = process.cwd()
-  // const env = loadEnv(mode, root)
+  // const env = loadEnv(mode, process.cwd())
   console.log('command', command, mode)
 
   return {
@@ -22,6 +22,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     },
     build: {
       minify: 'terser',
+      chunkSizeWarningLimit: 1500,
       terserOptions: {
         compress: {
           drop_console: true, //打包时删除console
@@ -41,6 +42,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       vue(),
       vueJsx(),
       eslintPlugin(),
+      VueSetupExtend(),
       viteCompression({
         verbose: true,
         disable: false,

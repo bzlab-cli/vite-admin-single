@@ -12,10 +12,9 @@
 </template>
 
 <script lang="ts">
-import { DeviceType } from '@/store/modules/app/state'
 import { computed, defineComponent, onBeforeMount, onBeforeUnmount, onMounted, reactive, toRefs } from 'vue'
-import { useStore } from 'vuex'
-import { AppActionTypes } from '@/store/modules/app/types'
+import { useAppStore, DeviceType } from '@/store/modules/app'
+import { useSettingsStore } from '@/store/modules/settings'
 import { AppMain, Navbar, Sidebar } from './components'
 import resize from './resize'
 
@@ -27,12 +26,13 @@ export default defineComponent({
     Sidebar
   },
   setup() {
-    const store = useStore()
+    const appStore = useAppStore()
+    const settingsStore = useSettingsStore()
     const { sidebar, device, addEventListenerOnResize, resizeMounted, removeEventListenerResize, watchRouter } =
       resize()
     const state = reactive({
       handleClickOutside: () => {
-        store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, false)
+        appStore.closeSidebar(false)
       }
     })
 
@@ -46,7 +46,7 @@ export default defineComponent({
     })
 
     const fixedHeader = computed(() => {
-      return store.state.settings.fixedHeader
+      return settingsStore.fixedHeader
     })
 
     watchRouter()

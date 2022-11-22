@@ -3,32 +3,39 @@
  * @Description:
  * @Date: 2021/10/25 18:56:51
  * @LastEditors: jrucker
- * @LastEditTime: 2021/10/27 19:47:30
+ * @LastEditTime: 2022/11/22 17:34:43
  */
+import { reactive, toRefs } from 'vue'
+import { defineStore } from 'pinia'
+import { RouteLocationNormalized } from 'vue-router'
+import { store } from '@/store'
 
-import { Store as VuexStore, CommitOptions, DispatchOptions, Module } from 'vuex'
-import { RootState } from '@/store'
-import { state } from './state'
-import { mutations, Mutations } from './mutations'
-import { actions, Actions } from './actions'
-import { TagsViewState } from './state'
-
-export type TagsStore<S = TagsViewState> = Omit<VuexStore<S>, 'getters' | 'commit' | 'dispatch'> & {
-  commit<K extends keyof Mutations, P extends Parameters<Mutations[K]>[1]>(
-    key: K,
-    payload: P,
-    options?: CommitOptions
-  ): ReturnType<Mutations[K]>
-} & {
-  dispatch<K extends keyof Actions>(
-    key: K,
-    payload: Parameters<Actions[K]>[1],
-    options?: DispatchOptions
-  ): ReturnType<Actions[K]>
+export interface TagView extends Partial<RouteLocationNormalized> {
+  title?: string
 }
 
-export const store: Module<TagsViewState, RootState> = {
-  state,
-  mutations,
-  actions
+export interface TagsState {
+  cachedViews: (string | undefined)[]
+}
+
+export const useTagsStore = defineStore('tags', () => {
+  const state = reactive<TagsState>({
+    cachedViews: []
+  })
+
+  const addCacheView = views => {
+    state.cachedViews = views
+  }
+
+  const removeCacheView = view => {
+    if (!view) return
+    const index = state.cachedViews.indexOf(view?.toString())
+    index > -1 && state.cachedViews.splice(index, 1)
+  }
+
+  return { ...toRefs(state), addCacheView, removeCacheView }
+})
+
+export function useTagsStoreHook() {
+  return useTagsStore(store)
 }

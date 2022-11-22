@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2021/10/25 18:56:51
  * @LastEditors: jrucker
- * @LastEditTime: 2022/08/25 10:15:36
+ * @LastEditTime: 2022/11/22 18:33:35
  */
 
 /**
@@ -42,11 +42,13 @@ export const filterAsyncRouter = (routers, layout) => {
         item.component = layout
       } else {
         item.name = item.menuRoute
-        item.component = modules['/src/' + item.menuComponents]
+        item.component = modules['/src/views/' + item.menuComponents]
       }
     }
 
     if (item.childTreeList && item.childTreeList.length) {
+      console.log('333')
+
       item.children = filterAsyncRouter(item.childTreeList, layout)
     }
 

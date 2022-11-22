@@ -3,32 +3,30 @@
  * @Author: jrucker
  * @Date: 2020-12-17 15:37:56
  * @LastEditors: jrucker
- * @LastEditTime: 2021/12/13 18:33:59
+ * @LastEditTime: 2022/11/22 17:56:43
  */
 
-import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/types'
-import { DeviceType } from '@/store/modules/app/state'
+import { useAppStore, DeviceType } from '@/store/modules/app'
 import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 const WIDTH = 992
 
 export default function () {
-  const store = useStore()
+  const appStore = useAppStore()
   const device = computed(() => {
-    return store.state.app.device
+    return appStore.device
   })
 
   const sidebar = computed(() => {
-    return store.state.app.sidebar
+    return appStore.sidebar
   })
 
   const currentRoute = useRoute()
   const watchRouter = watch(
     () => currentRoute.name,
     () => {
-      if (store.state.app.device === DeviceType.Mobile && store.state.app.sidebar.opened) {
-        store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, false)
+      if (appStore.device === DeviceType.Mobile && appStore.sidebar.opened) {
+        appStore.closeSidebar(false)
       }
     }
   )
@@ -40,16 +38,16 @@ export default function () {
 
   const resizeMounted = () => {
     if (isMobile()) {
-      store.dispatch(AppActionTypes.ACTION_TOGGLE_DEVICE, DeviceType.Mobile)
-      store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, true)
+      appStore.toggleDevice(DeviceType.Mobile)
+      appStore.closeSidebar(true)
     }
   }
 
   const resizeHandler = () => {
     if (!document.hidden) {
-      store.dispatch(AppActionTypes.ACTION_TOGGLE_DEVICE, isMobile() ? DeviceType.Mobile : DeviceType.Desktop)
+      appStore.toggleDevice(isMobile() ? DeviceType.Mobile : DeviceType.Desktop)
       if (isMobile()) {
-        store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, true)
+        appStore.closeSidebar(true)
       }
     }
   }

@@ -3,7 +3,7 @@
  * @Description: 数据
  * @Date: 2021/10/25 18:56:51
  * @LastEditors: jrucker
- * @LastEditTime: 2022/08/12 14:57:15
+ * @LastEditTime: 2022/11/22 18:37:05
  */
 
 export const menuGrantByRole = [
@@ -35,7 +35,7 @@ export const menuGrantByRole = [
         menuName: '用户管理',
         menuType: 2,
         menuSort: 0,
-        menuComponents: '/views/system/user/index.vue',
+        menuComponents: 'system/user/index.vue',
         menuCode: '',
         menuUrl: 'user',
         menuRoute: 'user',
@@ -82,7 +82,7 @@ export const menuGrantByRole = [
         menuName: '菜单管理',
         menuType: 2,
         menuSort: 1,
-        menuComponents: '/views/system/menu/index.vue',
+        menuComponents: 'system/menu/index.vue',
         menuCode: '',
         menuUrl: 'menu',
         menuRoute: 'menu',
@@ -129,7 +129,7 @@ export const menuGrantByRole = [
         menuName: '角色管理',
         menuType: 2,
         menuSort: 2,
-        menuComponents: '/views/system/role/index.vue',
+        menuComponents: 'system/role/index.vue',
         menuCode: '',
         menuUrl: 'role',
         menuRoute: 'role',
@@ -176,7 +176,7 @@ export const menuGrantByRole = [
         menuName: '组织管理',
         menuType: 2,
         menuSort: 3,
-        menuComponents: '/views/system/org/index.vue',
+        menuComponents: 'system/org/index.vue',
         menuCode: '',
         menuUrl: 'org',
         menuRoute: 'org',

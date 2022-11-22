@@ -59,8 +59,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, reactive, watch, ref, nextTick, toRefs } from 'vue'
 import { useRoute, LocationQuery, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
-import { UserActionTypes } from '@/store/modules/user/types'
+import { useUserStore } from '@/store/modules/user'
 
 const validateAccount = (rule: any, value: string, callback: any) => {
   if (!value) {
@@ -87,7 +86,7 @@ export default defineComponent({
     const loginFormRef = ref(null)
     const router = useRouter()
     const route = useRoute()
-    const store = useStore()
+    const userStore = useUserStore()
     const state = reactive({
       login: {
         title: '管理平台',
@@ -126,7 +125,7 @@ export default defineComponent({
           if (valid) {
             state.loading = true
             try {
-              await store.dispatch(UserActionTypes.ACTION_LOGIN, state.loginForm)
+              await userStore.login(state.loginForm)
             } catch (error) {
               state.loading = false
             }
