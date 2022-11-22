@@ -3,7 +3,7 @@
  * @Author: jrucker
  * @Date: 2020-12-26 13:45:52
  * @LastEditors: jrucker
- * @LastEditTime: 2022/11/22 18:29:45
+ * @LastEditTime: 2022/11/22 18:39:05
  */
 
 import { reactive, toRefs } from 'vue'
@@ -77,8 +77,6 @@ export const usePermissionStore = defineStore('permission', () => {
     })
     const accessedRoutes = filterAsyncRouter(filterRoutes, Layout)
     accessedRoutes.push({ path: '/:pathMatch(.*)', redirect: '/404', meta: { hidden: true } })
-
-    console.log('222', accessedRoutes)
 
     state.routes = constantRoutes.concat(accessedRoutes) // 路由菜单
     state.dynamicRoutes = accessedRoutes // 动态路由
