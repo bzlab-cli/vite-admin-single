@@ -3,8 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import eslintPlugin from 'vite-plugin-eslint'
+import viteCompression from 'vite-plugin-compression'
 // import { loadEnv } from 'vite'
-
 const dynamicProxy = require('./build/proxy/index.ts')
 const resolve = (p: string) => path.resolve(__dirname, p)
 
@@ -37,7 +37,18 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         }
       }
     },
-    plugins: [vue(), vueJsx(), eslintPlugin()],
+    plugins: [
+      vue(),
+      vueJsx(),
+      eslintPlugin(),
+      viteCompression({
+        verbose: true,
+        disable: false,
+        threshold: 102400,
+        algorithm: 'gzip',
+        ext: '.gz'
+      })
+    ],
     css: {
       preprocessorOptions: {
         scss: {
