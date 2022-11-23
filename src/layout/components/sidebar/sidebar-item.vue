@@ -6,15 +6,19 @@
     <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
       <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
         <el-menu-item :index="resolvePath(theOnlyOneChild.path)" :class="{ 'submenu-title-noDropdown': isFirstLevel }">
-          <i v-if="theOnlyOneChild.meta.icon" :class="theOnlyOneChild.meta.icon" />
+          <el-icon v-if="theOnlyOneChild.meta.icon">
+            <component :is="theOnlyOneChild.meta.icon" />
+          </el-icon>
           <span v-if="theOnlyOneChild.meta.title">{{ theOnlyOneChild.meta.title }}</span>
         </el-menu-item>
       </SidebarItemLink>
     </template>
-    <el-submenu v-else :index="resolvePath(item.path)">
+    <el-sub-menu v-else :index="resolvePath(item.path)">
       <template #title>
-        <i v-if="item.meta && item.meta.icon" :class="item.meta.icon" />
-        <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
+        <el-icon v-if="item.meta && item.meta.icon">
+          <component :is="item.meta.icon" />
+        </el-icon>
+        <span v-if="isCollapse && item.meta && item.meta.title">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">
         <sidebar-item
@@ -27,7 +31,7 @@
           class="nest-menu"
         />
       </template>
-    </el-submenu>
+    </el-sub-menu>
   </div>
 </template>
 
@@ -54,7 +58,8 @@ export default defineComponent({
     },
     basePath: {
       type: String,
-      required: true
+      required: true,
+      default: ''
     }
   },
   components: {
@@ -128,6 +133,9 @@ export default defineComponent({
 }
 
 .full-mode {
+  :deep(.el-sub-menu__icon-arrow) {
+    display: none;
+  }
   .nest-menu .el-submenu > .el-submenu__title,
   .el-submenu .el-menu-item {
     min-width: $sideBarWidth !important;
@@ -143,32 +151,10 @@ export default defineComponent({
       padding-left: 5px;
     }
   }
-  .el-submenu {
-    overflow: hidden;
-
-    & > .el-submenu__title {
-      .el-submenu__icon-arrow {
-        display: none;
-      }
-
-      & > span {
-        padding-left: 5px;
-      }
-    }
-  }
 }
 
 .simple-mode {
   &.first-level {
-    .submenu-title-noDropdown {
-      padding: 0 !important;
-      position: relative;
-
-      .el-tooltip {
-        padding: 0 !important;
-      }
-    }
-
     .el-submenu {
       overflow: hidden;
 
@@ -184,18 +170,6 @@ export default defineComponent({
         }
       }
     }
-  }
-}
-</style>
-
-<style lang="scss" scoped>
-svg {
-  margin-right: 16px;
-}
-
-.simple-mode {
-  svg {
-    margin-left: 20px;
   }
 }
 </style>

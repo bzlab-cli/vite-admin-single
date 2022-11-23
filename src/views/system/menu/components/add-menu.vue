@@ -1,7 +1,7 @@
 <template>
   <div class="menu-container">
     <el-dialog :title="dialogTitle" v-model="isShowDialog" width="769px" @close="onCancel">
-      <el-form ref="formRef" :model="ruleForm" :rules="rules" size="small" label-width="80px">
+      <el-form ref="formRef" :model="ruleForm" :rules="rules" label-width="80px">
         <el-row :gutter="35">
           <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
             <el-form-item label="菜单类型" prop="menuType">
@@ -48,6 +48,7 @@
               <icon-selector placeholder="请输入菜单图标" v-model="ruleForm.menuIcon" />
             </el-form-item>
           </el-col>
+
           <el-col
             :xs="24"
             :sm="12"
@@ -136,8 +137,8 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="onCancel" size="small">取消</el-button>
-          <el-button type="primary" @click="onSubmit" size="small">确定</el-button>
+          <el-button @click="onCancel">取消</el-button>
+          <el-button type="primary" @click="onSubmit">确定</el-button>
         </span>
       </template>
     </el-dialog>

@@ -2,6 +2,7 @@
   <div class="icon-selector">
     <el-popover
       placement="bottom"
+      trigger="click"
       :width="fontIconWidth"
       v-model:visible="fontIconVisible"
       popper-class="icon-selector-popper"
@@ -13,21 +14,16 @@
           :clearable="clearable"
           :disabled="disabled"
           :size="size"
+          style="width: 267px"
           ref="inputWidthRef"
           @clear="onClearFontIcon"
           @focus="onIconFocus"
           @blur="onIconBlur"
         >
           <template #prepend>
-            <i
-              :class="[
-                fontIconPrefix === '' ? prepend : fontIconPrefix,
-                { iconfont: fontIconTabsIndex === 0 },
-                { ele: fontIconTabsIndex === 1 },
-                { fa: fontIconTabsIndex === 2 }
-              ]"
-              class="font14"
-            />
+            <el-icon class="font14 ele">
+              <component :is="fontIconPrefix === '' ? prepend : fontIconPrefix" />
+            </el-icon>
           </template>
         </el-input>
       </template>
@@ -50,7 +46,9 @@
                   <div class="icon-selector-wrap-item" :class="{ 'icon-selector-active': fontIconPrefix === v }">
                     <div class="flex-margin">
                       <div class="icon-selector-wrap-item-value">
-                        <i :class="v" />
+                        <el-icon>
+                          <component :is="v" />
+                        </el-icon>
                       </div>
                     </div>
                   </div>
@@ -68,6 +66,7 @@
 <script lang="ts">
 import { ref, toRefs, reactive, onMounted, nextTick, computed, watch } from 'vue'
 import initIconfont from '@/utils/style-sheets'
+
 export default {
   name: 'iconSelector',
   emits: ['update:modelValue', 'get', 'clear'],
@@ -75,7 +74,7 @@ export default {
     // 输入框前置内容
     prepend: {
       type: String,
-      default: () => 'el-icon-thumb'
+      default: () => 'Menu'
     },
     // 输入框占位文本
     placeholder: {
@@ -85,7 +84,7 @@ export default {
     // 输入框占位文本
     size: {
       type: String,
-      default: () => 'small'
+      default: () => 'default'
     },
     // 弹窗标题
     title: {
@@ -147,9 +146,9 @@ export default {
     // 图标搜索及图标数据显示
     const fontIconSheetsFilterList = computed(() => {
       if (!state.fontIconSearch) return state.fontIconSheetsList
-      let search = state.fontIconSearch.trim().toLowerCase()
+      let search = state.fontIconSearch.trim()
       return state.fontIconSheetsList.filter((item: any) => {
-        if (item.toLowerCase().indexOf(search) !== -1) return item
+        if (item.indexOf(search) !== -1) return item
       })
     })
     // 获取 input 的宽度
@@ -166,22 +165,10 @@ export default {
     }
     // 初始化数据
     const initFontIconData = async () => {
-      if (props.type === 'ali') {
-        await initIconfont.ali().then((res: any) => {
-          state.fontIconTabsIndex = 0
-          // 阿里字体图标使用 `iconfont xxx`
-          state.fontIconSheetsList = res.map(i => `iconfont ${i}`)
-        })
-      } else if (props.type === 'ele') {
+      if (props.type === 'ele') {
         await initIconfont.ele().then((res: any) => {
           state.fontIconTabsIndex = 1
           state.fontIconSheetsList = res
-        })
-      } else if (props.type === 'awe') {
-        await initIconfont.awe().then((res: any) => {
-          state.fontIconTabsIndex = 2
-          // fontawesome字体图标使用 `fa xxx`
-          state.fontIconSheetsList = res.map(i => `fa ${i}`)
         })
       }
       state.fontIconPlaceholder = props.placeholder
@@ -191,9 +178,7 @@ export default {
     const onColClick = (v: any) => {
       state.fontIconPlaceholder = v
       state.fontIconVisible = false
-      if (state.fontIconTabsIndex === 0) state.fontIconPrefix = `${v}`
-      else if (state.fontIconTabsIndex === 1) state.fontIconPrefix = `${v}`
-      else if (state.fontIconTabsIndex === 2) state.fontIconPrefix = `${v}`
+      if (state.fontIconTabsIndex === 1) state.fontIconPrefix = `${v}`
       emit('get', state.fontIconPrefix)
       emit('update:modelValue', state.fontIconPrefix)
     }
@@ -230,6 +215,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.icon-selector {
+  width: 100%;
+}
 .icon-selector-wrap {
   .icon-selector-wrap-row {
     margin-top: 5px;

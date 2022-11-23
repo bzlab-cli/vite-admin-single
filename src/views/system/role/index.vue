@@ -2,17 +2,16 @@
   <div class="role-container">
     <el-card shadow="hover">
       <div class="system-user-search mb15">
-        <el-button size="small" type="primary" @click="onOpenAddRole({})">新增角色</el-button>
+        <el-button type="primary" @click="onOpenAddRole({})">新增角色</el-button>
         <div class="box-right">
           <el-input
             class="mr10"
             v-model="tableData.params.roleName"
-            size="small"
             placeholder="请输入角色名称"
-            prefix-icon="el-icon-search"
+            prefix-icon="Search"
             style="max-width: 180px"
           />
-          <el-button size="small" type="primary" @click="handleSearch">查询</el-button>
+          <el-button type="primary" @click="handleSearch">查询</el-button>
         </div>
       </div>
       <el-table :data="tableData.data" stripe style="width: 100%">
@@ -31,20 +30,33 @@
         <el-table-column prop="createTime" label="创建时间" show-overflow-tooltip />
         <el-table-column prop="operate" label="操作" width="90">
           <template #default="scope">
-            <el-button size="mini" type="text" v-if="scope.row.editFlag === 1" @click="onOpenAuthorize(scope.row)">
+            <el-button
+              size="small"
+              type="primary"
+              link
+              v-if="scope.row.editFlag === 1"
+              @click="onOpenAuthorize(scope.row)"
+            >
               授权
             </el-button>
-            <el-button size="mini" type="text" v-if="scope.row.editFlag === 1" @click="onOpenEditRole(scope.row)">
+            <el-button
+              size="small"
+              type="primary"
+              link
+              class="ml5"
+              v-if="scope.row.editFlag === 1"
+              @click="onOpenEditRole(scope.row)"
+            >
               修改
             </el-button>
-            <!-- <el-button size="mini" type="text" @click="onRowDel(scope.row)">删除</el-button> -->
+            <!-- <el-button size="small" type="primary" link class="ml5" @click="onRowDel(scope.row)">删除</el-button> -->
           </template>
         </el-table-column>
       </el-table>
       <el-pagination
         @size-change="onHandleSizeChange"
         @current-change="onHandleCurrentChange"
-        class="a-right mt15"
+        class="fx-ec mt15"
         :pager-count="5"
         :page-sizes="[10, 20, 30]"
         v-model:current-page="tableData.params.pageNum"

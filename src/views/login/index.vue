@@ -16,7 +16,7 @@
 
       <el-form-item prop="account">
         <span class="svg-container">
-          <i class="el-icon-user" />
+          <el-icon><User /></el-icon>
         </span>
         <el-input
           ref="userNameRef"
@@ -31,7 +31,7 @@
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <i class="el-icon-lock" />
+          <el-icon><Lock /></el-icon>
         </span>
         <el-input
           :key="passwordType"
@@ -44,9 +44,6 @@
           autocomplete="on"
           @keyup.enter="handleLogin"
         />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :name="passwordType === 'password' ? 'eye-off' : 'eye-on'" />
-        </span>
       </el-form-item>
 
       <el-button :loading="loading" type="primary" class="submit" @click.prevent="handleLogin">
@@ -57,9 +54,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, watch, ref, nextTick, toRefs } from 'vue'
+import { defineComponent, onMounted, reactive, watch, ref, toRefs } from 'vue'
 import { useRoute, LocationQuery, useRouter } from 'vue-router'
-import { useUserStore } from '@/store/modules/user'
+import { useUserStore } from '@/views/admin/store/modules/user'
 
 const validateAccount = (rule: any, value: string, callback: any) => {
   if (!value) {
@@ -110,16 +107,6 @@ export default defineComponent({
     })
 
     const methods = reactive({
-      showPwd: () => {
-        if (state.passwordType === 'password') {
-          state.passwordType = ''
-        } else {
-          state.passwordType = 'password'
-        }
-        nextTick(() => {
-          ;(passwordRef.value as any).focus()
-        })
-      },
       handleLogin: () => {
         ;(loginFormRef.value as any).validate(async (valid: boolean) => {
           if (valid) {
@@ -183,23 +170,28 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
-@supports (-webkit-mask: none) and (not (cater-color: $loginCursorColor)) {
-  .login-container .el-input {
-    input {
-      color: $loginCursorColor;
-    }
-    input::first-line {
-      color: $lightGray;
-    }
-  }
-}
+<style lang="scss" scoped>
 .login-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: $loginBg;
+  .el-form-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #454545;
+  }
   .el-input {
     display: inline-block;
     height: 47px;
     width: 85%;
-    input {
+    :deep(.el-input__wrapper) {
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+    }
+    :deep(input) {
       height: 47px;
       background: transparent;
       border: 0;
@@ -214,34 +206,6 @@ export default defineComponent({
       }
     }
   }
-  .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
-  }
-}
-</style>
-
-<style lang="scss" scoped>
-.login-container {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  background-color: $loginBg;
-  video {
-    position: absolute;
-
-    /* Vertical and Horizontal center */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
   .login-form {
     position: relative;
     width: 520px;
@@ -253,16 +217,6 @@ export default defineComponent({
   .submit {
     width: 100%;
     margin-bottom: 30px;
-  }
-  .tips {
-    font-size: 14px;
-    color: #ffffff;
-    margin-bottom: 10px;
-    span {
-      &:first-of-type {
-        margin-right: 16px;
-      }
-    }
   }
   .svg-container {
     padding: 6px 5px 6px 15px;
@@ -279,34 +233,6 @@ export default defineComponent({
       margin: 0 auto 40px auto;
       text-align: center;
       font-weight: bold;
-    }
-    .set-language {
-      color: #ffffff;
-      position: absolute;
-      top: 3px;
-      font-size: 18px;
-      right: 0;
-      cursor: pointer;
-    }
-  }
-  .show-pwd {
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    font-size: 16px;
-    color: $darkGray;
-    cursor: pointer;
-    user-select: none;
-  }
-  .thirdparty-button {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-  }
-
-  @media only screen and (max-width: 470px) {
-    .thirdparty-button {
-      display: none;
     }
   }
 }

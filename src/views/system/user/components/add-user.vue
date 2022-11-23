@@ -1,7 +1,7 @@
 <template>
   <div class="user-container">
     <el-dialog :title="dialogTitle" v-model="isShowDialog" width="500px" @close="onCancel">
-      <el-form :model="ruleForm" :rules="rules" ref="formRef" size="small" label-width="80px">
+      <el-form :model="ruleForm" :rules="rules" ref="formRef" label-width="80px">
         <el-form-item label="用户名" prop="userName">
           <el-input v-model="ruleForm.userName" placeholder="请输入" clearable />
         </el-form-item>
@@ -44,8 +44,8 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="onCancel" size="small">取消</el-button>
-          <el-button type="primary" @click="onSubmit" size="small">确定</el-button>
+          <el-button @click="onCancel">取消</el-button>
+          <el-button type="primary" @click="onSubmit">确定</el-button>
         </span>
       </template>
     </el-dialog>

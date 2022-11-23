@@ -3,18 +3,17 @@
     <el-card shadow="hover">
       <div class="org-search mb15">
         <div class="add-org">
-          <el-button size="small" type="primary" @click="onOpenAddOrg({})">新增组织</el-button>
+          <el-button type="primary" @click="onOpenAddOrg({})">新增组织</el-button>
         </div>
         <div class="search">
           <el-input
             class="mr10"
             v-model="tableData.params.orgName"
-            size="small"
             placeholder="请输入组织名称"
-            prefix-icon="el-icon-search"
+            prefix-icon="Search"
             style="max-width: 180px"
           />
-          <el-button size="small" type="primary" @click="handleSearch">查询</el-button>
+          <el-button type="primary" @click="handleSearch">查询</el-button>
         </div>
       </div>
       <el-table
@@ -35,8 +34,8 @@
         <el-table-column prop="remarks" label="备注" show-overflow-tooltip />
         <el-table-column prop="operate" label="操作" width="90">
           <template #default="scope">
-            <el-button size="mini" type="text" @click="onOpenEditOrg(scope.row)">修改</el-button>
-            <!-- <el-button size="mini" type="text" @click="onRowDel(scope.row)">删除</el-button> -->
+            <el-button size="small" type="primary" link @click="onOpenEditOrg(scope.row)">修改</el-button>
+            <!-- <el-button size="small" type="primary" link class="ml5" @click="onRowDel(scope.row)">删除</el-button> -->
           </template>
         </el-table-column>
       </el-table>

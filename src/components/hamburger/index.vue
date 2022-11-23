@@ -1,6 +1,6 @@
 <template>
   <div :class="[{ 'is-active': isActive }]" @click="toggleClick">
-    <i class="icon el-icon-s-unfold" />
+    <el-icon :size="20"><Expand /></el-icon>
   </div>
 </template>
 
@@ -27,9 +27,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.icon {
+.el-icon {
   vertical-align: middle;
-  font-size: 21px;
   color: #333;
 }
 

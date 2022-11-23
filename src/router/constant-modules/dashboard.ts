@@ -24,7 +24,7 @@ const DashboardRouter: Array<RouteRecordRaw> = [
         name: 'dashboard',
         meta: {
           title: '首页',
-          icon: 'el-icon-menu',
+          icon: 'Menu',
           affix: true
         }
       }

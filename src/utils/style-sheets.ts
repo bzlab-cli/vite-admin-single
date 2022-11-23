@@ -3,121 +3,34 @@
  * @Description:
  * @Date: 2021/11/08 18:56:51
  * @LastEditors: jrucker
- * @LastEditTime: 2022/08/12 14:12:57
+ * @LastEditTime: 2022/11/23 17:32:44
  */
 
 import { nextTick } from 'vue'
+import * as Icons from '@element-plus/icons'
 
-// 获取阿里字体图标
-const getAlicdnIconfont = () => {
-  return new Promise((resolve, reject) => {
-    nextTick(() => {
-      const styles: any = document.styleSheets
-      const sheetsList: any = []
-      const sheetsIconList: any = []
-      for (let i = 0; i < styles.length; i++) {
-        if (styles[i].href && styles[i].href.indexOf('at.alicdn.com') > -1) {
-          sheetsList.push(styles[i])
-        }
-      }
-      for (let i = 0; i < sheetsList.length; i++) {
-        for (let j = 0; j < sheetsList[i].cssRules.length; j++) {
-          if (sheetsList[i].cssRules[j].selectorText && sheetsList[i].cssRules[j].selectorText.indexOf('.icon-') > -1) {
-            sheetsIconList.push(
-              `${sheetsList[i].cssRules[j].selectorText
-                .substring(1, sheetsList[i].cssRules[j].selectorText.length)
-                .replace(/\:\:before/gi, '')}`
-            )
-          }
-        }
-      }
-      if (sheetsIconList.length > 0) resolve(sheetsIconList)
-      else reject('未获取到值，请刷新重试')
-    })
-  })
-}
-
-// 初始化获取 css 样式，获取 element plus 自带图标
 const getElementPlusIconfont = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     nextTick(() => {
-      const styles: any = document.styleSheets
-      let sheetsIconList: any = []
-      for (let i = 0; i < styles.length; i++) {
-        for (let j = 0; j < styles[i].cssRules.length; j++) {
-          if (styles[i].cssRules[j].selectorText && styles[i].cssRules[j].selectorText.indexOf('.el-icon-') === 0) {
-            if (/::before/.test(styles[i].cssRules[j].selectorText)) {
-              sheetsIconList.push(
-                `${styles[i].cssRules[j].selectorText
-                  .substring(1, styles[i].cssRules[j].selectorText.length)
-                  .replace(/\:\:before/gi, '')}`
-              )
-            }
-          }
-        }
-      }
-      sheetsIconList = [...new Set(sheetsIconList)]
-      if (sheetsIconList.length > 0) resolve(sheetsIconList.reverse())
-      else reject('未获取到值，请刷新重试')
-    })
-  })
-}
-
-// 初始化获取 css 样式，这里使用 fontawesome 的图标
-const getAwesomeIconfont = () => {
-  return new Promise((resolve, reject) => {
-    nextTick(() => {
-      const styles: any = document.styleSheets
-      const sheetsList: any = []
-      const sheetsIconList: any = []
-      for (let i = 0; i < styles.length; i++) {
-        if (styles[i].href && styles[i].href.indexOf('netdna.bootstrapcdn.com') > -1) {
-          sheetsList.push(styles[i])
-        }
-      }
-      for (let i = 0; i < sheetsList.length; i++) {
-        for (let j = 0; j < sheetsList[i].cssRules.length; j++) {
-          if (
-            sheetsList[i].cssRules[j].selectorText &&
-            sheetsList[i].cssRules[j].selectorText.indexOf('.fa-') === 0 &&
-            sheetsList[i].cssRules[j].selectorText.indexOf(',') === -1
-          ) {
-            if (/::before/.test(sheetsList[i].cssRules[j].selectorText)) {
-              sheetsIconList.push(
-                `${sheetsList[i].cssRules[j].selectorText
-                  .substring(1, sheetsList[i].cssRules[j].selectorText.length)
-                  .replace(/\:\:before/gi, '')}`
-              )
-            }
-          }
-        }
-      }
-      if (sheetsIconList.length > 0) resolve(sheetsIconList.reverse())
-      else reject('未获取到值，请刷新重试')
+      const icons = [] as string[]
+      Object.keys(Icons).forEach(key => {
+        const name = Icons[key].name
+        icons.push(name)
+      })
+      resolve(icons)
     })
   })
 }
 
 /**
  * 获取字体图标 `document.styleSheets`
- * @method ali 获取阿里字体图标 `<i class="iconfont 图标类名"></i>`
- * @method ele 获取 element plus 自带图标 `<i class="图标类名"></i>`
- * @method ali 获取 fontawesome 的图标 `<i class="fa 图标类名"></i>`
+ * @method ele 获取 element plus 图标
  */
 const initIconfont = {
-  // iconfont
-  ali: () => {
-    return getAlicdnIconfont()
-  },
   // element plus
   ele: () => {
     return getElementPlusIconfont()
-  },
-  // fontawesome
-  awe: () => {
-    return getAwesomeIconfont()
   }
 }
 
-// 导出方法
 export default initIconfont

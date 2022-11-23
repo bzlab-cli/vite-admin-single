@@ -1,6 +1,6 @@
 <template>
   <div class="err-page">
-    <el-button icon="el-icon-arrow-left" class="back-btn" @click="back">返回</el-button>
+    <el-button icon="ArrowLeft" type="primary" class="back-btn" @click="back">返回</el-button>
     <el-row>
       <el-col :span="12">
         <h1 class="text-jumbo text-ginormous">Oops!</h1>
@@ -52,8 +52,6 @@ export default defineComponent({
   margin: 100px auto;
 
   .back-btn {
-    background: #008489;
-    color: #fff;
     border: none !important;
   }
 
@@ -82,7 +80,7 @@ export default defineComponent({
     }
 
     a {
-      color: #008489;
+      color: #409eff;
       text-decoration: none;
 
       &:hover {
