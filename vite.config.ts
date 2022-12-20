@@ -41,7 +41,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     plugins: [
       vue(),
       vueJsx(),
-      eslintPlugin(),
+      eslintPlugin({
+        cache: false
+      }),
       VueSetupExtend(),
       viteCompression({
         verbose: true,
