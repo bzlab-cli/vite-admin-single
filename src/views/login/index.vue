@@ -56,7 +56,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, reactive, watch, ref, toRefs } from 'vue'
 import { useRoute, LocationQuery, useRouter } from 'vue-router'
-import { useUserStore } from '@/views/admin/store/modules/user'
+import { useUserStore } from '@/store/modules/user'
 
 const validateAccount = (rule: any, value: string, callback: any) => {
   if (!value) {
