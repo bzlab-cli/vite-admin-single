@@ -10,15 +10,6 @@ $tiffany: #4ab7bd;
 $yellow: #fec171;
 $panGreen: #30b08f;
 
-// Sidebar
-// $sideBarWidth:300px;
-// $subMenuBg:#1f2d3d;
-// $subMenuHover:#001528;
-// $subMenuActiveText:#f4f4f5;
-// $menuBg:#fff;
-// $menuText:#162B64;
-// $menuActiveText:#435EBE;
-
 // sidebar
 $sideBarWidth: 210px;
 $subMenuBg: #1f2d3d;
@@ -35,7 +26,20 @@ $darkGray: #889aa4;
 $loginBg: #2d3a4b;
 $loginCursorColor: #fff;
 
+// theme
+$--color-primary: #1890ff;
+$--color-success: #13ce66;
+$--color-warning: #ffba00;
+$--color-danger: #ff4949;
+$--color-info: #5d5d5d;
+$--button-font-weight: 400;
+$--color-text-regular: #1f2d3d;
+$--border-color-light: #dfe4ed;
+$--border-color-lighter: #e6ebf5;
+$--table-border: 1px solid#dfe6ec;
+
 :export {
+  theme: $--color-primary;
   menuBg: $menuBg;
   menuText: $menuText;
   menuActiveText: $menuActiveText;
