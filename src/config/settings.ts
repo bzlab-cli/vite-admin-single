@@ -26,7 +26,7 @@ export function getEnv(val) {
   const obj = {
     development: 'nzf-dev',
     deployment: 'nzf-dev',
-    release: 'nzf-test',
+    test: 'nzf-test',
     production: 'nzf-prod'
   }
   return obj[val]
